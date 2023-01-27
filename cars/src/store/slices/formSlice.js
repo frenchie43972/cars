@@ -1,13 +1,13 @@
 // createSlice is a function from the Redux Toolkit that allows for 
 // the creation of a slice of the Redux store.
 import { createSlice } from "@reduxjs/toolkit";
-
+import { addCar } from "./carsSlice";
 
 const formSlice = createSlice({
   // the name property identifies the slice in the store
   name: 'form',
-  // the intial state is and object in the slice that sets default
-  // properties
+  // the intial state is an object in the slice that sets default
+  // properties of name and cost
   initialState: {
     name: '',
     cost: 0,
@@ -24,11 +24,17 @@ const formSlice = createSlice({
       state.cost = action.payload;
     },
   },
+  extraReducers(builder) {
+    builder.addCase(addCar, (state, action) => {
+      state.name = '';
+      state.cost = 0;
+    });
+  }
 });
 
 // Those actions are then dispatched to the store
 export const { changeName, changeCost } = formSlice.actions;
 // this reducer will export the slice of the store that the actions
-// will affect
+// will affect.
 export const formReducer = formSlice.reducer;
 

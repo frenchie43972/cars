@@ -6,7 +6,7 @@ const carsSlice = createSlice({
   name: 'cars',
   initialState: {
     searchTerm: '',
-    cars: [],
+    data: [],
   },
   reducers: {
     // This will update the search term state with the action payload  
@@ -16,7 +16,7 @@ const carsSlice = createSlice({
     // Pushes a new name and cost object to the cars array and uses
     // the nanoid labrary to assign a URL friendly unique ID for the car
     addCar(state, action) {
-      state.cars.push({
+      state.data.push({
         name: action.payload.name,
         cost: action.payload.cost,
         id: nanoid(),
@@ -26,10 +26,10 @@ const carsSlice = createSlice({
     // any car entry with an equal ID to the payload of the action
     // effectivly deleting an entry
     removeCar(state, action) {
-      const updated = state.cars.filter((car) => {
+      const updated = state.data.filter((car) => {
         return car.id !== action.payload;
       });
-      state.cars = updated;
+      state.data = updated;
     },
   },
 });
